@@ -1,0 +1,40 @@
+.custom-legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.custom-legend-item:last-child {
+  margin-bottom: 0;
+}
+
+.square {
+  display: block;
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: 5px;
+  margin-right: 26px;
+}
+
+.square.blue {
+  background: #2d4ab9;
+}
+
+.square.red {
+  background: #ff394a;
+}
+
+.square.yellow {
+  background: #ffed57;
+}
+
+.square.white {
+  background: white;
+}
+
+@media only screen and (max-width: 768px) {
+  .square {
+    margin-right: 16px;
+  }
+}

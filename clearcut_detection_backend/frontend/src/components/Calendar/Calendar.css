@@ -1,0 +1,73 @@
+.calendar_inner {
+  display: flex;
+  align-items: center;
+}
+
+.DateRangePickerInput {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  background: rgba(255, 255, 255, 0.1);
+  padding-left: 10px;
+}
+
+.DateInput {
+  width: 40%;
+  position: relative;
+  background: none;
+}
+
+.DateInput_input {
+  font-size: 14px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  background: none;
+  padding: 7px 0;
+}
+
+.DateInput_input__focused {
+  border-width: 2px;
+  border-color: #fff;
+}
+
+.DateRangePickerInput_arrow svg {
+  fill: rgba(255, 255, 255, 0.8);
+  width: 14px;
+}
+
+.calendar_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 40px;
+  border-radius: 0 5px 5px 0;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px;
+  cursor: pointer;
+}
+
+.calendar_icon.is-focused {
+  background-color: #fff;
+}
+
+.calendar_icon.is-focused svg {
+  color: #202020;
+}
+
+@media only screen and (max-height: 724px) {
+  .DateRangePicker_picker, .DateRangePicker_picker_1, .DateRangePicker_picker__directionLeft, .DateRangePicker_picker__directionLeft_2 {
+    bottom: -270px !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .DateInput_input {
+    font-size: 13px;
+  }
+
+  .DateRangePickerInput_arrow svg {
+    margin: 0 5px;
+  }
+}

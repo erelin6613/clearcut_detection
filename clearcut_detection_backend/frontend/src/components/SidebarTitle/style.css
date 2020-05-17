@@ -1,0 +1,17 @@
+.sidebar-title {
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.sidebar-title * {
+  font-weight: inherit;
+  margin: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .sidebar-title {
+    font-size: 14px;
+  }
+}

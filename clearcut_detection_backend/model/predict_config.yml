@@ -1,0 +1,13 @@
+models:
+  deforestration_detection:
+    network: unet50
+    channels:
+      - rgb
+      - ndvi
+      - b8
+    weights: /model/unet_v4.pth
+
+prediction:
+  save_path: data
+  threshold: 0.3
+  input_size: 224
