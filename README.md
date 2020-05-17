@@ -147,6 +147,6 @@ python cut_images.py --source_path ../data/source
 ```
 Afterwards it should be split and annotates:
 ```
-python annoation.py --source_path ../data/source --train_size 0.7 --test_size 0.1 --val_size 0.2
+python annotation.py --source_path ../data/source --train_size 0.7 --test_size 0.1 --val_size 0.2
 ```
 Once it is done the data is ready to train as described previosly.
