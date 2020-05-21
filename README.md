@@ -129,3 +129,24 @@ python evaluation.py \
 3) Run clearcut_research/notebooks/tf_records_visualizer.ipynb to view results of evaluation.
 
 4) Run clearcut_research/notebooks/f1_score.ipynb to get metrics for the whole image.
+
+
+### Soil Erosion branch
+
+Generic pipeline of deployemnt is inherented from the main branch of Clearcut project. However, there are key differences.
+1) At this point the project is not designed to update frequently since soil erosion as a rule does not show patterns of rapid growth, rather it is steady and gradual process.
+2) The model currently deployed has been trained with different feature input (namely the merge of green, red and near-infrared bands)
+
+#### Research indexes
+The script index_research.py can aid for further research of different metrics and input features. Currently this script generates previously mentioned NRG merge but with customization is capable of generating other layers such as SWIR, NDVI, SAVI etc.
+
+#### Data preparation for soil erosion
+The pipeline has been designed to work with Sentinel-2 obtained bands (10m resolution). To train model you will need the folder containing files *_B03_10m.jp2, *_B04_10m.jp2, *_B08_10m.jp2. To generate merged layer and cut images the file cut_images.py should be run:
+```
+python cut_images.py --source_path ../data/source
+```
+Afterwards it should be split and annotates:
+```
+python annotation.py --source_path ../data/source --train_size 0.7 --test_size 0.1 --val_size 0.2
+```
+Once it is done the data is ready to train as described previosly.

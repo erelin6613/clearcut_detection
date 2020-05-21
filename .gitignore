@@ -74,3 +74,5 @@ credentials.json
 # Model's weights
 *.pth
 
+# Polygons
+*.geojson

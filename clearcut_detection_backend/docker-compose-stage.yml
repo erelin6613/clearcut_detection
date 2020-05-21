@@ -10,20 +10,20 @@ db:
   volumes:
     - ./:/code
 
-model:
-  build: ./model
+#model:
+#  build: ./model
 #    context: ./model
-  dockerfile: model.Dockerfile
+#  dockerfile: model.Dockerfile
 #  image: clearcut_detection/model
-  env_file:
-    - ./model/model.env
-  volumes:
-    - ./model/:/model
-    - ./data/:/model/data
-  working_dir: /model
-  ports:
-    - "5000:5000"
-  command: /bin/bash -c "pip install -r requirements.txt && python app.py"
+#  env_file:
+#    - ./model/model.env
+#  volumes:
+#    - ./model/:/model
+#    - ./data/:/model/data
+#  working_dir: /model
+#  ports:
+#    - "5000:5000"
+#  command: /bin/bash -c "pip install -r requirements.txt && python app.py"
 
 react:
   image: node:10.15.0

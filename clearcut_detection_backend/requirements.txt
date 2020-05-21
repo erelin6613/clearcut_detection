@@ -1,3 +1,4 @@
+easyargs==0.9.4
 Django==2.2.3
 django-cors-headers==3.0.2
 django-rest-swagger==2.2.0

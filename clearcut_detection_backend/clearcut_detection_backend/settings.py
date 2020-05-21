@@ -82,6 +82,18 @@ TEMPLATES = [
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'geodb', #'clearcuts_db',
+        'USER': 'val',#'ecoProj',
+        'PASSWORD': 'os.environ.get('psql_pass')', #os.getenv('DB_PASSWORD', 'zys8rwTAC9VIR1X9'),
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
+    }
+}
+"""
 
 DATABASES = {
     'default': {

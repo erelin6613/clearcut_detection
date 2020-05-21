@@ -9,6 +9,10 @@ export default [
   },
   {
     url: 'https://github.com/QuantuMobileSoftware/clearcut_detection',
-    text: 'GitHub repository'
+    text: 'GitHub repository (clearcut detection barnch)'
+  },
+  {
+    url: 'https://github.com/erelin6613/clearcut_detection',
+    text: 'GitHub repository (soil erosion barnch)'
   },
 ];

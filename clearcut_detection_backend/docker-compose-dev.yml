@@ -1,16 +1,43 @@
 version: '3'
+
+volumes:
+  dbbackups:
+  postgis-data:
+
 services:
+
   db:
-    build:
-      context: ./
-      dockerfile: postgis.Dockerfile
-    image: clearcut_detection/database
-    expose:
-      - 5432
-    env_file:
-      - db.env
-    volumes:
-      - ./:/code
+    image: kartoza/postgis:12.0
+    #volumes:
+    #  - postgis-data:/var/lib/postgresql
+    #  - dbbackups:/backups
+    environment:
+      # If you need to create multiple database you can add coma separated databases eg gis,data
+      - POSTGRES_DB=clearcuts_db
+      - POSTGRES_USER=ecoProj
+      - POSTGRES_PASS=zys8rwTAC9VIR1X9
+      - ALLOW_IP_RANGE=0.0.0.0/0
+      # Add extensions you need to be enabled by default in the DB. Default are the five specified below
+      - POSTGRES_MULTIPLE_EXTENSIONS=postgis,hstore,postgis_topology,postgis_raster,pgrouting
+    ports:
+      - 25432:5432
+    restart: on-failure
+    healthcheck:
+      test: "exit 0"
+
+
+#services:
+#  db:
+#    build:
+#      context: ./
+#      dockerfile: postgis.Dockerfile
+#    image: clearcut_detection/database
+#    expose:
+#      - 5432
+#    env_file:
+#      - db.env
+#    volumes:
+#      - ./:/code
 
   react:
     image: node:10.15.0
@@ -23,20 +50,20 @@ services:
       - django
     command: /bin/bash -c "npm install && npm run-script start"
 
-  model:
-    build:
-      context: ./model
-      dockerfile: model.Dockerfile
-    image: clearcut_detection/model
-    env_file:
-      - ./model/model.env
-    volumes:
-      - ./model/:/model
-      - ./data/:/model/data
-    working_dir: /model
-    ports:
-      - '5000:5000'
-    command: /bin/bash -c "pip install -r requirements.txt && python app.py"
+#  model:
+#    build:
+#      context: ./model
+#      dockerfile: model.Dockerfile
+#    image: clearcut_detection/model
+    #    env_file:
+    #  - ./model/model.env
+#    volumes:
+#      - ./model/:/model
+#      - ./data/:/model/data
+#    working_dir: /model
+#    ports:
+#      - '5000:5000'
+#    command: /bin/bash -c "pip install -r requirements.txt && python app.py"
 
   django:
     build:
@@ -61,7 +88,7 @@ services:
     depends_on:
       - django
     ports:
-      - 80:80
+      - 60:60
       - 443:443
     volumes:
       - ./nginx/dev.nginx.conf:/etc/nginx/conf.d/default.conf
