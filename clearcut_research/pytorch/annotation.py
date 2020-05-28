@@ -6,6 +6,7 @@ from PIL import Image
 import albumentations as alb
 from random import shuffle
 from tqdm import tqdm
+import argparse
 
 def parse_args():
 
@@ -13,11 +14,11 @@ def parse_args():
         description='Annotate image mini-tiles for training.'
     )
     parser.add_argument(
-    	'--train_size', '-trs' type=float, default=0.7, dest='train_size')
+    	'--train_size', '-trs', type=float, default=0.7, dest='train_size')
     parser.add_argument(
-    	'--test_size', '-ts' type=float, default=0.2, dest='test_size')
+    	'--test_size', '-ts', type=float, default=0.2, dest='test_size')
     parser.add_argument(
-    	'--val_size', '-vs' type=float, default=0.1, dest='val_size')
+    	'--val_size', '-vs', type=float, default=0.1, dest='val_size')
     parser.add_argument(
     	'--source_path', '-s', dest='source_path', required=True)
 
@@ -62,7 +63,7 @@ def save_new_image(folder, filename):
 
 # Annotate all cut images with masks. Note: flags masks in this
 # function track how many pixels are tagged as mask
-def annotate(paths, DIR=args.source_path, masks=True, MASK_DIR=MASK_DIR):
+def annotate(paths, DIR, masks=True, MASK_DIR=None):
 
 	if masks:
 		if MASK_DIR is not None:
@@ -99,19 +100,19 @@ def make_sets():
 				for f in d[2]:
 					all_paths.append(os.path.join(d[0], f))
 	shuffle(all_paths)
-	train_ind= int(len(all_paths)*TRAIN_SIZE)
-	test_ind = int(len(all_paths)*TEST_SIZE)
+	train_ind= int(len(all_paths)*args.train_size)
+	test_ind = int(len(all_paths)*args.test_size)
 	val_ind = len(all_paths) - train_ind - test_ind
 	train_set = all_paths[:train_ind]
 	test_set = all_paths[train_ind:(len(all_paths)-val_ind)]
 	val_set = all_paths[-val_ind:]
 
 	print('Getting data together...')
-	annotate(train_set).to_csv('train_df.csv')
+	annotate(train_set, DIR=args.source_path).to_csv('train_df.csv')
 	print('Train set has been written')
-	annotate(test_set).to_csv('test_df.csv')
+	annotate(test_set, DIR=args.source_path).to_csv('test_df.csv')
 	print('Test set has been written')
-	annotate(val_set).to_csv('val_df.csv')
+	annotate(val_set, DIR=args.source_path).to_csv('val_df.csv')
 	print('Validation set has been written')
 
 if __name__ == '__main__':
